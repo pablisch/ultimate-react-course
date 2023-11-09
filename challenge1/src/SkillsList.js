@@ -18,4 +18,4 @@ function SkillsList() {
   )
 }
 
-export default SkillsList
+export default SkillsList;

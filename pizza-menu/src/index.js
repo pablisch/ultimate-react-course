@@ -73,10 +73,10 @@ function Menu() {
       <h2>Our Menu</h2>
       {pizzas.length > 0 && (
         <ul className='pizzas'>
-          {pizzas.map((pizza, index) => (
-            <Pizza key={index} pizza={pizza} />
-          ))}
-        </ul>
+        {pizzas.map((pizza, index) => (
+          <Pizza key={index} pizza={pizza} />
+        ))}
+      </ul>
       )}
     </main>
   );
@@ -84,12 +84,12 @@ function Menu() {
 
 function Pizza({ pizza }) {
   return (
-    <li className='pizza'>
+    <li className={`pizza ${pizza.soldOut && 'sold-out'}`}>
       <img src={pizza.photoName} alt={pizza.name} />
       <div>
         <h3>{pizza.name}</h3>
         <p>{pizza.ingredients}</p>
-        <p>£{pizza.price}</p>
+        <span>{pizza.soldOut ? "SOLD OUT" : `£${pizza.price}`}</span>
       </div>
     </li>
   );
@@ -102,7 +102,7 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closeHour;
 
   return (
-    <footer className='footer'>
+    <footer className="footer">
       {isOpen ? (
         <Order closeHour={closeHour} openHour={openHour} />
       ) : (
@@ -116,12 +116,12 @@ function Footer() {
 
 function Order({ closeHour, openHour }) {
   return (
-    <div className='order'>
+    <div className="order">
       <p>
         We're open from {openHour}:00 to {closeHour}:00. Come visit us or order
         online.
       </p>
-      <button className='btn'>Order</button>
+      <button className="btn">Order</button>
     </div>
   );
 }
