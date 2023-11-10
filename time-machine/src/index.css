@@ -16,7 +16,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: -20px;
+  /* margin-bottom: -20px; */
 }
 
 p {
@@ -29,3 +29,8 @@ p {
   font-size: 1.2rem;
   font-weight: bold;
 }
+
+.center {
+  text-align: center;
+}
+

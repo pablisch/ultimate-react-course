@@ -43,10 +43,10 @@ const questions = [
 ];
 
 function FlashCards() {
-  const [activeCard, setActiveCard] = useState(0);
+  const [activeCard, setActiveCard] = useState(null);
 
   const handleClick = (id) => {
-    setActiveCard(activeCard === id ? 0 : id)
+    setActiveCard(activeCard === id ? null : id)
     console.log(activeCard)
   }
 
