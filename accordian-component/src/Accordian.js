@@ -1,17 +1,20 @@
+import { useState } from "react"
 import AccordianItem from './AccordianItem';
 
 function Accordian({ data }) {
-  console.log('faqs in Acc:', data);
+
+  const [curOpen, setCurOpen] = useState(null);
 
   return (
-    <div className='accordian'>
+    <div className='accordion'>
       {data.map((el, index) => (
         <AccordianItem
+          curOpen={curOpen}
+          setCurOpen={setCurOpen}
           key={index}
           num={index}
           title={el.title}
-          text={el.text}
-        />
+        >{ curOpen === index && <div className="content-box">{el.text}</div>}</AccordianItem>
       ))}
     </div>
   );
