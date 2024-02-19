@@ -98,7 +98,7 @@ function Search({ query, setQuery }) {
   }
   
   useKeypress('Enter', setFocusToSearch)
- 
+
   return (
     <input
       className='search'
