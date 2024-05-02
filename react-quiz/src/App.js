@@ -1,5 +1,5 @@
 import './App.css';
-import DateCounter from './components/DateCounter';
+import DateCounter from './DateCounter';
 
 export default function App() {
   return (
