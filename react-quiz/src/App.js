@@ -6,6 +6,9 @@ import Error from './components/Error';
 import Loader from './components/Loader';
 import StartScreen from './components/StartScreen';
 import Question from './components/Question';
+import NextButton from './components/NextButton'
+import Progress from './components/Progress';
+import FinishScreen from './components/FinishScreen';
 
 const initialState = {
   questions: [],
@@ -43,6 +46,11 @@ const reducer = (state, action) => {
             ? state.points + question.points
             : state.points,
       };
+    case 'nextQuestion':
+      return { ...state, index: state.index + 1, answer: null };
+    case 'finish':
+      console.log('finsihed', state.index)
+      return { ...state, status: 'finished' }
 
     default:
       throw new Error('Unknown action type');
@@ -50,12 +58,13 @@ const reducer = (state, action) => {
 };
 
 export default function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
   const numQuestions = questions.length;
+  const maxPoints = questions.reduce((acc, curr) => acc += curr.points, 0)
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -83,12 +92,17 @@ export default function App() {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === 'active' && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-          />
+          <>
+            <Progress index={index} numQuestions={numQuestions} points={points} maxPoints={maxPoints} answer={answer} />
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            {answer !== null && <NextButton dispatch={dispatch} answer={answer} index={index} numQuestions={numQuestions} />}
+          </>
         )}
+        {status === 'finished' && <FinishScreen points={points} maxPoints={maxPoints} />}
       </Main>
     </div>
   );
