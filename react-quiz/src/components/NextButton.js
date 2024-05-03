@@ -2,7 +2,6 @@ import React from 'react'
 
 const NextButton = ({ dispatch, answer, index, numQuestions }) => {
 
-
   if (answer === null) return null;
 
   if (index < numQuestions - 1) 
